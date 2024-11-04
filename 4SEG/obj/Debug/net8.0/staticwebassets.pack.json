@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\login.html",
+      "PackagePath": "staticwebassets\\login.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.4SEG.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.4SEG.props",
+      "PackagePath": "build\\4SEG.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.4SEG.props",
+      "PackagePath": "buildMultiTargeting\\4SEG.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.4SEG.props",
+      "PackagePath": "buildTransitive\\4SEG.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

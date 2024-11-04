@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "gQ1mmLts6pHeWtEP2luXfnnju0QqVz2DcCI2km9gBLE=",
+  "Source": "4SEG",
+  "BasePath": "_content/4SEG",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "4SEG\\wwwroot",
+      "Source": "4SEG",
+      "ContentRoot": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\",
+      "BasePath": "_content/4SEG",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\login.html",
+      "SourceId": "4SEG",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\",
+      "BasePath": "_content/4SEG",
+      "RelativePath": "login.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\login.html"
+    }
+  ]
+}
