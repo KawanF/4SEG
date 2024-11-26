@@ -2,49 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script>
-        async function getUserIP() {
-            try {
-                const response = await fetch("https://api.ipify.org?format=json");
-                const data = await response.json();
-                return data.ip;
-            } catch (error) {
-                console.error("Erro ao obter o IP:", error);
-                return null;
-            }
-        }
+        async function login(event) {
+            event.preventDefault();
 
-        async function login() {
+            // Captura o IP público do usuário
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            const ipUsuario = ipData.ip;
+
             const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            const ipAtual = await getUserIP();
+            const senha = document.getElementById("password").value;
 
-            const response = await fetch("https://localhost:5001/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password, ipAtual })
+            const loginRequest = {
+                username: username,
+                senha: senha,
+                IpAutorizado: ipUsuario // Envia o IP do usuário
+            };
+
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(loginRequest)
             });
 
+            const result = await response.json();
             if (response.ok) {
-                const data = await response.json();
-                localStorage.setItem("jwtToken", data.token);
-                window.location.href = "/swagger";
+                alert("Login realizado com sucesso!");
+                window.location.href = "/swagger"; 
             } else {
-                alert("Login falhou. Verifique suas credenciais.");
+                alert(result.message || "Erro ao fazer login");
             }
         }
     </script>
 </head>
 <body>
-    <h2>Login</h2>
-    <form onsubmit="event.preventDefault(); login();">
-        <label for="username">Usuário:</label>
-        <input type="text" id="username" required>
-        <br>
-        <label for="password">Senha:</label>
-        <input type="password" id="password" required>
-        <br>
+    <h1>Login</h1>
+    <form onsubmit="login(event)">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Senha" required>
         <button type="submit">Entrar</button>
     </form>
 </body>

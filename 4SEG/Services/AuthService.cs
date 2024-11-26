@@ -74,4 +74,6 @@ public class AuthService : IAuthService
     {
         System.IO.File.AppendAllText("log.txt", $"{DateTime.Now}: {mensagem}\n");
     }
+
+   
 }

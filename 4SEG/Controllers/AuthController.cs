@@ -17,12 +17,22 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public IActionResult Login([FromBody] LoginRequest loginRequest)
     {
-        var token = _authService.Login(loginRequest.Username, loginRequest.Password, HttpContext.Connection.RemoteIpAddress.ToString());
+        var token = _authService.Login(loginRequest.Username, loginRequest.Senha, loginRequest.IpAutorizado);
 
         if (token == null)
-            return Unauthorized("Credenciais inválidas");
+    {
+        return Unauthorized("Credenciais inválidas.");
+    }
 
-        return Ok(new { Token = token });
+    // Salva o token JWT em um cookie
+    HttpContext.Response.Cookies.Append("AuthToken", token, new CookieOptions
+    {
+        HttpOnly = true,
+        Secure = true, // Use true em produção (HTTPS)
+        Expires = DateTime.UtcNow.AddHours(1)
+    });
+
+    return Ok(new { Message = "Login bem-sucedido." });
     }
 }
 
@@ -30,6 +40,8 @@ public class AuthController : ControllerBase
 public class LoginRequest
 {
     public string Username { get; set; }
-    public string Password { get; set; }
+    public string Senha { get; set; }
+    public string IpAutorizado { get; set; }
+
 }
 

@@ -4,7 +4,7 @@
 
     public interface IEmailService
     {
-        Task EnviarEmailAsync(string destinatario, string assunto, string corpo);
+        void SendEmail(string toEmail, string subject, string body);
     }
 
 }

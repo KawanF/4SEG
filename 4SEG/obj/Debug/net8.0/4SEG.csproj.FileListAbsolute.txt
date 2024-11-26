@@ -62,7 +62,6 @@ E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dl
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\MimeKit.dll
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.Drawing.Common.dll
-E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.Formats.Asn1.dll
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.Memory.Data.dll
 E:\repo visual studio\4SEG\4SEG\bin\Debug\net8.0\System.Runtime.Caching.dll

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "gQ1mmLts6pHeWtEP2luXfnnju0QqVz2DcCI2km9gBLE=",
+  "Hash": "18HnHbwklAbRI5LhERDut1181Z/O6Vvx6rM7nIPD9hg=",
   "Source": "4SEG",
   "BasePath": "_content/4SEG",
   "Mode": "Default",
@@ -34,6 +34,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\login.html"
+    },
+    {
+      "Identity": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\register.html",
+      "SourceId": "4SEG",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\repo visual studio\\4SEG\\4SEG\\wwwroot\\",
+      "BasePath": "_content/4SEG",
+      "RelativePath": "register.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\register.html"
     }
   ]
 }

@@ -33,7 +33,24 @@ builder.Services.AddAuthentication(options =>
     {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateLifetime = true
+        ValidateLifetime = true,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero // Sem tolerância para expiração
+    };
+
+    // Configuração para aceitar token do cookie
+    options.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var token = context.Request.Cookies["AuthToken"];
+            if (!string.IsNullOrEmpty(token))
+            {
+                context.Token = token;
+            }
+            return Task.CompletedTask;
+        }
     };
 });
 
@@ -43,23 +60,6 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseStaticFiles();
 
-// Middleware para redirecionar ao login se não autenticado
-app.Use(async (context, next) =>
-{
-    var path = context.Request.Path.Value;
-
-    if (path != null && (path.StartsWith("/swagger") || path.StartsWith("/api/swagger")))
-    {
-        if (!context.User.Identity?.IsAuthenticated ?? true)
-        {
-            context.Response.Redirect("/login.html"); 
-            return;
-        }
-    }
-
-    await next();
-});
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -67,8 +67,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Middleware de autenticação e autorização
 app.UseAuthentication();
 app.UseAuthorization();
+
+// Mapear controladores
 app.MapControllers();
 
 app.Run();

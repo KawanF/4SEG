@@ -1,29 +1,35 @@
-﻿namespace _4SEG.Services;
-using MailKit.Net.Smtp;
-using MimeKit;
-using System.Threading.Tasks;
+﻿using System.Net;
+using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
 
-public class EmailService : IEmailService
+namespace _4SEG.Services
 {
-    public void EnviarEmail(string destinatario, string assunto, string mensagem)
+    public class EmailService : IEmailService
     {
-        var emailMessage = new MimeMessage();
-        emailMessage.From.Add(new MailboxAddress("Admin", "admin@example.com"));
-        emailMessage.To.Add(new MailboxAddress("", destinatario));
-        emailMessage.Subject = assunto;
-        emailMessage.Body = new TextPart("plain") { Text = mensagem };
+        private readonly string _smtpServer;
+        private readonly int _smtpPort;
+        private readonly string _fromEmail;
+        private readonly string _password;
 
-        using (var client = new SmtpClient())
+        public EmailService(IConfiguration configuration)
         {
-            client.Connect("smtp.example.com", 587, false);
-            client.Authenticate("username", "password");
-            client.Send(emailMessage);
-            client.Disconnect(true);
+            _smtpServer = configuration["EmailConfig:SmtpServer"];
+            _smtpPort = int.Parse(configuration["EmailConfig:SmtpPort"]);
+            _fromEmail = configuration["EmailConfig:FromEmail"];
+            _password = configuration["EmailConfig:Password"];
         }
-    }
 
-    public Task EnviarEmailAsync(string destinatario, string assunto, string corpo)
-    {
-        throw new NotImplementedException();
+        public void SendEmail(string toEmail, string subject, string body)
+        {
+            var message = new MailMessage(_fromEmail, toEmail, subject, body);
+            var client = new SmtpClient
+            {
+                Host = _smtpServer,
+                Port = _smtpPort,
+                EnableSsl = true,
+                Credentials = new NetworkCredential(_fromEmail, _password)
+            };
+            client.Send(message);
+        }
     }
 }

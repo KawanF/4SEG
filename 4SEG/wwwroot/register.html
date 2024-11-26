@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <script>
+        async function register(event) {
+            event.preventDefault();
+
+            // Captura o IP público do usuário
+            const ipResponse = await fetch('https://api.ipify.org?format=json');
+            const ipData = await ipResponse.json();
+            const ipUsuario = ipData.ip;
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const nome = document.getElementById("nome").value;
+            const email = document.getElementById("email").value;
+            const perfil = document.getElementById("perfil").value;  // Perfil escolhido (Aluno ou Professor)
+
+            const registerData = {
+                Username: username,
+                Senha: password,
+                Nome: nome,
+                Email: email,
+                Perfil: perfil,  // Envia o perfil escolhido
+                IPAutorizado: ipUsuario // Armazena o IP do usuário
+            };
+
+            const response = await fetch('/api/usuario/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(registerData)
+            });
+
+            if (response.ok) {
+                alert("Cadastro realizado com sucesso!");
+                window.location.href = "/login.html"; // Redireciona para a página de login
+            } else {
+                const result = await response.json();
+                alert(result.message || "Erro ao realizar cadastro");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Cadastro</h1>
+    <form onsubmit="register(event)">
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Senha" required>
+        <input type="text" id="nome" placeholder="Nome Completo" required>
+        <input type="email" id="email" placeholder="Email" required>
+
+        <!-- Dropdown para escolher o perfil -->
+        <label for="perfil">Perfil:</label>
+        <select id="perfil" required>
+            <option value="Aluno">Aluno</option>
+            <option value="Professor">Professor</option>
+        </select>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
